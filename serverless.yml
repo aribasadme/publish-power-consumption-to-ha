@@ -9,7 +9,7 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.10
   stage: ${opt:stage, 'dev'}
   region: eu-west-3
   deploymentBucket:	sls-deployment-bucket-${env:CI_ENV}
