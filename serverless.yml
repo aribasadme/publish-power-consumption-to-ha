@@ -1,0 +1,44 @@
+service: publish-power-consumption-to-ha
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  sqsQueueNameCsvObjectCreated: csv-object-created
+  sqsQueueArnCsvObjectCreated: arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqsQueueNameCsvObjectCreated}
+
+provider:
+  name: aws
+  runtime: python3.10
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-3
+  deploymentBucket:	sls-deployment-bucket-${env:CI_ENV}
+  environment:
+    HA_TOKEN: ${env:HA_TOKEN}
+    HA_URL: ${env:HA_URL}
+    MONTHS: ${env:MONTHS}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:GetObject"
+        - "s3:GetObjectVersion"
+      Resource:
+        - "arn:aws:s3:::riblup-home-management/*"
+    - Effect: "Allow"
+      Action:
+        - "sqs:DeleteMessage"
+        - "sqs:ReceiveMessage"
+        - "sqs:SendMessage"
+        - "sqs:GetQueueAttributes"
+      Resource:
+        - "${self:custom.sqsQueueArnCsvObjectCreated}"
+
+functions:
+  run:
+    handler: handler.run
+    description: Pushes power consumption data into Home Assistant.
+    timeout: 30
+    events:
+      - sqs:
+          arn: "${self:custom.sqsQueueArnCsvObjectCreated}"
+          batchSize: 1
