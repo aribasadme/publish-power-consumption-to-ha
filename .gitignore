@@ -1,3 +1,6 @@
+# OS Related
+.DS_Store/
+
 # Environment
 venv/
 .env

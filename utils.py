@@ -39,8 +39,8 @@ def publish_to_ha(bucket: str, key: str) -> bool:
             r = requests.post(url=HA_URL+var_name,
                               headers=headers,
                               json=data)
+            r.raise_for_status()
             log.info(r.json())
-            log.info("Data successfully published to HA")
             return True
         except requests.exceptions.RequestException as e:
             log.error(e)

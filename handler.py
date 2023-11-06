@@ -17,6 +17,7 @@ def run(event, _):
             key = record["s3"]["object"]["key"]
             response = publish_to_ha(bucket=bucket, key=key)
     if response:
+        log.info("Data successfully published to HA")
         log.info("SUCCESS")
     else:
         log.info("ERROR. Could not connect to Home Assistant")
