@@ -42,7 +42,7 @@ def publish_to_ha(bucket: str, key: str) -> bool:
             r.raise_for_status()
             log.info(r.json())
             return True
-        except requests.exceptions.RequestException as e:
+        except requests.exceptions.ConnectionError as e:
             log.error(e)
             return False
     else:
