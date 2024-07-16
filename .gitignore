@@ -12,5 +12,8 @@ venv/
 # Terraform
 .terraform/
 
+# Test files
+*test*
+
 # Visual Studio Code
 .vscode/*
