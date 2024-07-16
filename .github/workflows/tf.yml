@@ -27,6 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: development
+    defaults:
+      run:
+        working-directory: terraform/
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -37,8 +40,6 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
           role-session-name: GitHub-OIDC-TERRAFORM
-
-      - run: cd terraform/
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -111,6 +112,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
+    defaults:
+      run:
+        working-directory: terraform/
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -121,8 +125,6 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
           role-session-name: GitHub-OIDC-TERRAFORM
-
-      - run: cd terraform/
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
