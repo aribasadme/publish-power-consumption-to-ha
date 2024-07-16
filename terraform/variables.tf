@@ -1,5 +1,5 @@
 variable "env" {
-  default = "dev"
+  default = "prod"
 }
 variable "aws_region" {
   type = string
