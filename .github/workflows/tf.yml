@@ -15,6 +15,7 @@ env:
   TF_LOG: INFO
   TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
   TF_VAR_sqs_queue_name: ${{ vars.SQS_QUEUE_NAME }}
+  TF_VAR_sqs_queue_url: ${{ vars.SQS_QUEUE_URL }}
 
 jobs:
   terraform-prod:
@@ -47,9 +48,10 @@ jobs:
       - name: Terraform Init
         id: init
         env:
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-          AWS_BUCKET_KEY_NAME: ${{ github.event.repository.name }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+          BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+          PLAN_NAME: ${{ github.event.repository.name }}
+          REGION: ${{ secrets.AWS_REGION }}
+        run: terraform init -backend-config="bucket=${BUCKET_NAME}" -backend-config="key=${PLAN_NAME}/${REGION}.tfstate" -backend-config="region=${AWS_REGION}"
 
       - name: Terraform Validate
         id: validate

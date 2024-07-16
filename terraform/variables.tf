@@ -7,3 +7,6 @@ variable "aws_region" {
 variable "sqs_queue_name" {
   type = string
 }
+variable "sqs_queue_url" {
+  type = string
+}

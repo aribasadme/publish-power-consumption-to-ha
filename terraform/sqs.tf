@@ -1,6 +1,6 @@
 import {
   to = aws_sqs_queue.csv_object_created
-  id = "https://sqs.eu-west-3.amazonaws.com/505394176116/csv-object-created"
+  id = var.sqs_queue_url
 }
 
 resource "aws_sqs_queue" "csv_object_created" {
