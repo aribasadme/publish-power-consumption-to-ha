@@ -2,11 +2,15 @@
 .DS_Store/
 
 # Environment
+.venv/
 venv/
 .env
 
 # Distribution / packaging
 *.zip
+
+# Terraform
+.terraform/
 
 # Visual Studio Code
 .vscode/*
