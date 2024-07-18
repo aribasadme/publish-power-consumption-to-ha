@@ -31,7 +31,7 @@ jobs:
           CI_ENV: prod
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET_PREFIX }}-${{ secrets.AWS_REGION }}
+          DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET_PREFIX }}eu-west-3
           HA_TOKEN: ${{ secrets.HA_TOKEN }}
           HA_URL: ${{ secrets.HA_URL }}
           MONTHS: ${{ vars.MONTHS }}
