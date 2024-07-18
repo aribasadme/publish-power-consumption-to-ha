@@ -1,4 +1,4 @@
-name: Remove AWS services
+name: Serverless Remove
 
 on: workflow_dispatch
 

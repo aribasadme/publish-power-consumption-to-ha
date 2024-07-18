@@ -1,4 +1,4 @@
-name: "Terraform Plan"
+name: "Terraform"
 
 on:
   push:
@@ -18,8 +18,8 @@ env:
   TF_VAR_sqs_queue_url: ${{ vars.SQS_QUEUE_URL }}
 
 jobs:
-  terraform-prod:
-    name: "Terraform Prod"
+  terraform:
+    name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,10 +48,10 @@ jobs:
       - name: Terraform Init
         id: init
         env:
-          BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+          BUCKET_NAME: ${{ secrets.TF_BACKEND_BUCKET_NAME }}
           PLAN_NAME: ${{ github.event.repository.name }}
           REGION: ${{ secrets.AWS_REGION }}
-        run: terraform init -backend-config="bucket=${BUCKET_NAME}" -backend-config="key=${PLAN_NAME}/${REGION}.tfstate" -backend-config="region=${AWS_REGION}"
+        run: terraform init -backend-config="bucket=${BUCKET_NAME}" -backend-config="key=${PLAN_NAME}/${REGION}.tfstate" -backend-config="region=${REGION}"
 
       - name: Terraform Validate
         id: validate
