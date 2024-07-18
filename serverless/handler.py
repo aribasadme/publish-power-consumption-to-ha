@@ -22,4 +22,4 @@ def run(event, _):
         log.info("Data successfully published to HA")
         log.info("SUCCESS")
     else:
-        log.info("ERROR. Could not connect to Home Assistant")
+        log.error("ERROR. Could not connect to Home Assistant")
