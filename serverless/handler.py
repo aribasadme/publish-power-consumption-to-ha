@@ -1,11 +1,12 @@
 import logging
 import json
+import os
 
 from utils import publish_to_ha
 
 
 log = logging.getLogger()
-log.setLevel(logging.INFO)
+log.setLevel(logging.getLevelName(str(os.environ["LOG_LEVEL"]).upper()))
 
 
 def run(event, _):
