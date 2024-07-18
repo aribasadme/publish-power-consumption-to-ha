@@ -1,5 +1,5 @@
 {
     "name": "publish-power-consumption-to-ha",
     "description": "AWS Lambda function that pushes power consumption data into Home Assistant.",
-    "version": "0.1.0"
+    "version": "0.1.1"
 }

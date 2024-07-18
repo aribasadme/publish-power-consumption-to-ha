@@ -3,8 +3,8 @@ name: Serverless Remove
 on: workflow_dispatch
 
 jobs:
-  sls-remove-prod:
-    name: Serverless Remove Prod
+  sls-remove:
+    name: Serverless Remove
     runs-on: ubuntu-latest
     strategy:
       matrix:
