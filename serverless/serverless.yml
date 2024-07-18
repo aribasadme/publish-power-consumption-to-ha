@@ -18,6 +18,7 @@ provider:
   environment:
     HA_TOKEN: ${env:HA_TOKEN}
     HA_URL: ${env:HA_URL}
+    LOG_LEVEL: INFO
     MONTHS: ${env:MONTHS}
   iamRoleStatements:
     - Effect: "Allow"
