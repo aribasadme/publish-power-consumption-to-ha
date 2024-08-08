@@ -4,8 +4,7 @@ plugins:
   - serverless-python-requirements
 
 custom:
-  sqsQueueNameCsvObjectCreated: csv-object-created
-  sqsQueueArnCsvObjectCreated: arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqsQueueNameCsvObjectCreated}
+  sqsQueueName: csv-object-created
 
 provider:
   name: aws
@@ -13,7 +12,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: eu-west-3
   deploymentBucket:
-    name: ${env:DEPLOYMENT_BUCKET}
+    name: sls-deployments-${aws:accountId}-${self:provider.region}
     maxPreviousDeploymentArtifacts: 1
   environment:
     HA_TOKEN: ${env:HA_TOKEN}
@@ -34,7 +33,7 @@ provider:
         - "sqs:SendMessage"
         - "sqs:GetQueueAttributes"
       Resource:
-        - "${self:custom.sqsQueueArnCsvObjectCreated}"
+        - "arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqsQueueName}"
 
 functions:
   run:
@@ -43,5 +42,5 @@ functions:
     timeout: 30
     events:
       - sqs:
-          arn: "${self:custom.sqsQueueArnCsvObjectCreated}"
+          arn: "arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqsQueueName}"
           batchSize: 1
