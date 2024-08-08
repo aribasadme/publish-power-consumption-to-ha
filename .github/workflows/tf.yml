@@ -15,7 +15,6 @@ env:
   CI_ENVIRONMENT_NAME: prod
   TF_LOG: INFO
   TF_VAR_sqs_queue_name: ${{ vars.SQS_QUEUE_NAME }}
-  TF_VAR_sqs_queue_url: ${{ vars.SQS_QUEUE_URL }}
 
 jobs:
   terraform:
