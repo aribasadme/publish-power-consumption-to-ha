@@ -1,0 +1,1 @@
+PLAN_NAME=publish-power-consumption-to-ha
