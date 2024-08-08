@@ -1,8 +1,3 @@
-import {
-  to = aws_sqs_queue.csv_object_created
-  id = var.sqs_queue_url
-}
-
 resource "aws_sqs_queue" "csv_object_created" {
   name                      = var.sqs_queue_name
   delay_seconds             = 90
