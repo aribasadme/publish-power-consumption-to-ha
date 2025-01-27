@@ -2,9 +2,13 @@ service: publish-power-consumption-to-ha
 
 plugins:
   - serverless-python-requirements
+  - serverless-prune-plugin
 
 custom:
   sqsQueueName: csv-object-created
+  prune:
+    automatic: true
+    number: 3
 
 provider:
   name: aws
